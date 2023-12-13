@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Hero from './views/Hero.vue'
+import Hero from "./views/Hero.vue";
 </script>
 
 <template>
