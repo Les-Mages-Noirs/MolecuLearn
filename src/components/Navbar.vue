@@ -5,14 +5,16 @@ import loginSVG from "../../public/img/login.svg";
 <template>
 <div class="navbar bg-base-100">
   <div class="flex-1 space-x-12">
-    <a class="btn btn-ghost text-xl">Accueil</a>
-    <a class="btn btn-ghost text-xl">Recettes</a>
-    <a class="btn btn-ghost text-xl">Jouer</a>
+    <router-link class="btn btn-ghost text-xl" to="/">Accueil</router-link>
+    <router-link class="btn btn-ghost text-xl" to="/recipes">Recettes</router-link>
+    <router-link class="btn btn-ghost text-xl" to="/play">Jouer</router-link>
   </div>
   <div class="flex-none">
-    <button class="btn btn-square btn-ghost">
+    <router-link to="/login">
+      <button class="btn btn-square btn-ghost">
         <loginSVG />
-    </button>
+      </button>
+    </router-link> 
   </div>
 </div>
 </template>
