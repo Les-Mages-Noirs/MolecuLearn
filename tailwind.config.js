@@ -3,11 +3,28 @@ export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
-
       fontFamily: {
         montserrat: ["Montserrat"],
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#bef264",           
+          "secondary": "#bbf7d0",           
+          "accent": "#84cc16",           
+          "neutral": "#ffffff",           
+          "base-100": "#ffffff",            
+          "info": "#ccfbf1",            
+          "success": "#a5f3fc",           
+          "warning": "#fde68a",           
+          "error": "#fca5a5",
+      },
+      },
+    ],
+  },
+  plugins: [require("daisyui")],
 };
+
