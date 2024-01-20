@@ -12,7 +12,7 @@ export default {
     themes: [
       {
         mytheme: {
-          "primary": "#bef264",           
+          "primary": "#3C665A",           
           "secondary": "#bbf7d0",           
           "accent": "#84cc16",           
           "neutral": "#ffffff",           
