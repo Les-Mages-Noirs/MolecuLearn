@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import AtomCard from '../components/AtomCard.vue';
+import type { Atom } from '../utils/types';
 import { ref } from 'vue';
 
-const AtomsList = ref()
+const atomsList = ref<Atom[]>([]);
+
+
 
 </script>
 
@@ -12,7 +15,7 @@ const AtomsList = ref()
             a
         </div>
         <div class="h-full w-1/3 flex flex-col bg-blue-200">
-            a
+            <AtomCard v-for="atom in atomsList" :key="atom.id" :atom="atom" />
         </div>
     </div>
 </template>
