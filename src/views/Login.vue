@@ -36,7 +36,6 @@ const toggleForm = () => {
         </p>
       </div>
 
-
     </div>
   </section>
 </template>
