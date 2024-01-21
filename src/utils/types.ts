@@ -44,3 +44,11 @@ export interface Molecule {
     symbol: string;
     name: string;
   }
+
+  export interface GetMoleculesBody {
+    "@context": string
+    "@id": string
+    "@type": string
+    "hydra:totalItems": number
+    "hydra:member": Molecule[]
+  }
