@@ -1,8 +1,17 @@
 <script setup lang="ts">
-import type { AtomCardProps } from '../utils/types';
 import { defineProps } from 'vue';
 
+
+interface AtomCardProps {
+	atomicNumber: number;
+	symbol: string;
+	name: string;
+}
+
+
 const props = defineProps<AtomCardProps>();
+
+
 
 </script>
 
