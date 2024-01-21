@@ -38,3 +38,9 @@ export interface Molecule {
     discovery: number
     discoverer: string
   }
+
+  export interface AtomCardProps {
+    atomicNumber: number;
+    symbol: string;
+    name: string;
+  }

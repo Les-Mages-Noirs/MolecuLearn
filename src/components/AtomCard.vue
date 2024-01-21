@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import type { AtomCardProps } from '../utils/types';
+import { defineProps } from 'vue';
+
+const props = defineProps<AtomCardProps>();
 
 </script>
 
 <template>
-  <div class="card bordered shadow-lg">
+  <div class="card bordered shadow-lg bg-primary">
     <div class="card-body">
-      <slot></slot>
+      <div class="">{{ props.atomicNumber }}</div>
+      <div class="">{{ props.name }}</div>
+      <div class="">{{ props.symbol }}</div>
     </div>
   </div>
 </template>

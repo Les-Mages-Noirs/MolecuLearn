@@ -5,8 +5,6 @@ import { ref } from 'vue';
 
 const atomsList = ref<Atom[]>([]);
 
-
-
 </script>
 
 <template>
@@ -15,7 +13,7 @@ const atomsList = ref<Atom[]>([]);
             a
         </div>
         <div class="h-full w-1/3 flex flex-col bg-blue-200">
-            <AtomCard v-for="atom in atomsList" :key="atom.id" :atom="atom" />
+            <AtomCard v-for="atom in atomsList" :key="atom.id" :name="atom.name" :symbol="atom.symbol" :atomic-number="atom.atomicNumber"  />
         </div>
     </div>
 </template>
