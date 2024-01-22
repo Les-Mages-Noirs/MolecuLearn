@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AtomCard from '../components/AtomCard.vue';
-import type { AtomCardProps } from '../utils/types';
+import type { AtomCardProps } from '../utils/propsTypes';
 import { ref } from 'vue';
 
 const atomsList = ref<AtomCardProps[]>([ {
