@@ -4,8 +4,6 @@ import Login from "../views/Login.vue";
 import Game from "../views/Game.vue";
 import Recipes from "../views/Recipes.vue";
 
-
-
 const routes = [
   { path: "/", component: Hero },
   { path: "/login", component: Login },
