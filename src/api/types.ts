@@ -38,3 +38,13 @@ export interface Atom {
 	discovery: number;
 	discoverer: string;
 }
+export interface User {
+	'@context': string;
+	'@id': string;
+	'@type': string;
+	id: number;
+	email: string;
+	password: string;
+	roles: string[];
+	username: string;
+}
