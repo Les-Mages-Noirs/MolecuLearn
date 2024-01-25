@@ -22,10 +22,26 @@ export class API {
 	 * @param data - The data to send in the request body.
 	 * @returns A promise that resolves to the response data.
 	 */
-	static async post<T>(endpoint: string, data: any): Promise<T> {
-		return this.#fetch<T>([this.BASE_URL + endpoint, { method: 'POST', body: JSON.stringify(data) }]);
-	}
+	// Dans votre fichier api.ts ou là où se trouve la définition de API.post
 
+	static async post<T>(path: string, data: any, options?: RequestInit): Promise<T> {
+		const response = await fetch(path, {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+				...options?.headers, // fusionne les en-têtes existants avec ceux fournis dans les options
+			},
+			...options, // fusionne les autres options fournies
+		});
+
+		if (!response.ok) {
+			throw new Error(`Fetch error: ${response.status}`);
+		}
+
+		const body = await response.json();
+		return body as T;
+	};
 	/**
 	 * Sends a PATCH request to the specified endpoint.
 	 * @param endpoint - The endpoint to send the request to.

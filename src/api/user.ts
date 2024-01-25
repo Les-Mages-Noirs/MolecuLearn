@@ -21,6 +21,10 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 export const addUser = async (user: NewUser): Promise<User> => {
-    const body = await API.post<User>('/users', user);
+    const body = await API.post<User>('/users', user, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     return body;
 }
