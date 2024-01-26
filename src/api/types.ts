@@ -44,7 +44,5 @@ export interface User {
 	'@type': string;
 	id: number;
 	email: string;
-	password: string;
-	roles: string[];
 	username: string;
 }
