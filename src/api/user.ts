@@ -76,6 +76,6 @@ export const auth = async (email: string, password: string): Promise<string> => 
 interface MeBody extends User {}
 
 export const getMe = async (): Promise<User> => {
-	const user = await API.get<MeBody>('/api/users/me');
+	const user = await API.get<MeBody>('/api/me');
 	return user;
 };

@@ -44,8 +44,17 @@ function removeTokenFromLocalStorage() {
 	localStorage.removeItem('token');
 }
 
-console.log('token :', userStore.getToken());
-getMe().then(user => {
-	console.log('user :', user);
-	userStore.setUser(user);
-});
+async function retrieveUserFromAPI() {
+	if (userStore.isLoggedIn()) {
+		try {
+			const user = await getMe();
+			console.log('user', user);
+			return user;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	return {} as User;
+}
+
+userStore.setUser(await retrieveUserFromAPI());
