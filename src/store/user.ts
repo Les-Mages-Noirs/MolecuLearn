@@ -21,6 +21,7 @@ export const userStore = reactive({
 
 		if (!token) return false;
 		this.setToken(token);
+		retrieveUserFromAPI();
 		return true;
 	},
 	async logout() {
@@ -53,7 +54,7 @@ async function retrieveUserFromAPI() {
 			userStore.setUser(user);
 			console.log('zizi');
 
-			useToast().success('Logged in successfully!');
+			useToast().success('Connecté en tant que ' + user.username);
 		} catch (error) {
 			console.log(error);
 		}

@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import { addUser } from '../api/user';
 import { userStore } from '../store/user';
 import { useRouter } from 'vue-router';
+import { useToast } from 'vue-toastification';
 
 let email = ref('');
 let username = ref('');
@@ -42,6 +43,7 @@ const submitForm = async () => {
 
     try {
         await addUser(user);
+        useToast().success('Votre compte a été créé avec succès');
         router.push('/login');
     } catch (error: any) {
         if (error.type == 'ConstraintViolationList') {
