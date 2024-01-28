@@ -69,8 +69,13 @@ interface AuthBody {
 	token: string;
 }
 export const auth = async (email: string, password: string): Promise<string> => {
-	const body = await API.post<AuthBody>('/auth', { email, password });
-	return body.token;
+	try {
+		const body = await API.post<AuthBody>('/auth', { email, password });
+		return body.token;
+	} catch (error) {
+		console.log(error);
+		return '';
+	}
 };
 
 interface MeBody extends User {}
