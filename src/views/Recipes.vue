@@ -2,49 +2,20 @@
 import SearchBar from "../components/SearchBar.vue";
 import MoleculeCard from "../components/Cards/MoleculeCard.vue";
 import { ref } from "vue";
+import {  Molecule } from "../api/types";
 
-interface MoleculeCardProps {
-  name: string;
-  symbol: string;
-  atomicNumber: number;
-}
 
-const moleculesList = ref<MoleculeCardProps[]>([
+const moleculesList = ref<Molecule[]>([
+  //fake molecules
   {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
+    "@context": "/api/contexts/Molecule",
+    "@id": "/api/molecules/1",
+    "@type": "Molecule",
+    "id": 1,
+    "name": "Methane",
+    "connections": []
   },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
+              
 ]);
 </script>
 
@@ -62,10 +33,7 @@ const moleculesList = ref<MoleculeCardProps[]>([
       >
         <MoleculeCard
           v-for="molecule in moleculesList"
-          :key="molecule.atomicNumber"
-          :name="molecule.name"
-          :symbol="molecule.symbol"
-          :atomicNumber="molecule.atomicNumber"
+          :molecule="molecule"
         />
       </div>
     </div>
