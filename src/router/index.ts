@@ -13,7 +13,7 @@ const routes = [
 	{ path: '/signup', component: SignupVue },
 	{ path: '/recipes', component: Recipes },
 	{ path: '/ingredients', component: Ingredients },
-	{ path: '/profile', component: Profile }
+	{ path: '/profile', component: Profile },
 	{ path: '/addingredient', component: AddIngredients }
 ];
 
