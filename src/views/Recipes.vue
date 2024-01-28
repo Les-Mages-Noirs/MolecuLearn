@@ -20,6 +20,8 @@ const moleculesList = ref<Molecule[]>([
 </script>
 
 <template>
+    <div id="modal-portal">
+  </div>
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
       <div class="text-4xl font-bold">Les Molécules</div>

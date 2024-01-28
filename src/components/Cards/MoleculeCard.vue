@@ -10,6 +10,7 @@ const props = defineProps<{
 const showModal = ref(false);
 
 const openModal = () => {
+ 
   showModal.value = true;
 };
 
@@ -28,6 +29,7 @@ const closeModal = () => {
       </div>
     </div>
   </div>
-
-  <Modal v-if="showModal" @close-modal="closeModal" :molecule="props.molecule" />
+  <Teleport to='#modal-portal'>
+    <Modal v-if="showModal" @closeModal="closeModal" :molecule="props.molecule" />
+  </Teleport>
 </template>
