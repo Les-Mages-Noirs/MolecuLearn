@@ -10,14 +10,14 @@ interface GetMoleculesBody {
 }
 
 export const getMolecules = async (): Promise<Molecule[]> => {
-	const body = await API.get<GetMoleculesBody>('/molecules');
+	const body = await API.get<GetMoleculesBody>('/api/molecules');
 	return body['hydra:member'];
 };
 
 interface GetMoleculeByIdBody extends Molecule {}
 
 export const getMoleculeById = async (id: string): Promise<Molecule> => {
-	const body = await API.get<GetMoleculeByIdBody>(`/molecules/${id}`);
+	const body = await API.get<GetMoleculeByIdBody>(`/api/molecules/${id}`);
 	return body;
 };
 
@@ -26,6 +26,6 @@ interface GetMoleculesByUserIdBody {
 }
 
 export const getMoleculesByUserId = async (userId: string): Promise<Molecule[]> => {
-	const body: GetMoleculesByUserIdBody = await API.get(`/user/${userId}/molecules`);
+	const body: GetMoleculesByUserIdBody = await API.get(`/api/user/${userId}/molecules`);
 	return body['hydra:member'];
 };

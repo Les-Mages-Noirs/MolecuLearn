@@ -10,14 +10,14 @@ interface GetUsersBody {
 }
 
 export const getUsers = async (): Promise<User[]> => {
-	const body = await API.get<GetUsersBody>('/users');
+	const body = await API.get<GetUsersBody>('api/users');
 	return body['hydra:member'];
 };
 
 interface GetUserByIdBody extends User {}
 
 export const getUserById = async (id: string): Promise<User> => {
-	const body = await API.get<GetUserByIdBody>(`/users/${id}`);
+	const body = await API.get<GetUserByIdBody>(`api/users/${id}`);
 	return body;
 };
 
@@ -37,7 +37,7 @@ interface CreateUserBody {
 }
 
 export const addUser = async (newUser: NewUser): Promise<User> => {
-	return await API.post<CreateUserBody>('/users', newUser);
+	return await API.post<CreateUserBody>('api/users', newUser);
 };
 
 interface UpdateUser {
@@ -56,19 +56,26 @@ interface UpdateUserBody {
 }
 
 export const updateUser = async (id: string, updateUser: UpdateUser): Promise<User> => {
-	return await API.patch<UpdateUserBody>(`/users/${id}`, updateUser);
+	return await API.patch<UpdateUserBody>(`/api/users/${id}`, updateUser);
 };
 
 type DeleteUserBody = string;
 
 export const deleteUser = async (id: string): Promise<string> => {
-	return await API.delete<DeleteUserBody>(`/users/${id}`);
+	return await API.delete<DeleteUserBody>(`/api/users/${id}`);
 };
 
 interface AuthBody {
 	token: string;
 }
-export const auth = async (username: string, password: string): Promise<string> => {
-	const body = await API.post<AuthBody>('/login_check', { username, password });
+export const auth = async (email: string, password: string): Promise<string> => {
+	const body = await API.post<AuthBody>('/auth', { email, password });
 	return body.token;
+};
+
+interface MeBody extends User {}
+
+export const getMe = async (): Promise<User> => {
+	const user = await API.get<MeBody>('/api/users/me');
+	return user;
 };

@@ -10,7 +10,7 @@ interface GetAtomsBody {
 }
 
 export const getAtoms = async (): Promise<Atom[]> => {
-	const body = await API.get<GetAtomsBody>('/atoms');
+	const body = await API.get<GetAtomsBody>('/api/atoms');
 	return body['hydra:member'];
 };
 
@@ -21,6 +21,6 @@ interface GetAtomByIdBody extends Atom {
 }
 
 export const getAtomById = async (id: string): Promise<Atom> => {
-	const body = await API.get<GetAtomByIdBody>(`/atoms/${id}`);
+	const body = await API.get<GetAtomByIdBody>(`/api/atoms/${id}`);
 	return body;
 };

@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import SearchBar from "../components/SearchBar.vue";
 import MoleculeCard from "../components/Cards/MoleculeCard.vue";
-import type { MoleculeCardProps } from "../utils/propsTypes";
 import { ref } from "vue";
+
+interface MoleculeCardProps {
+  name: string;
+  symbol: string;
+  atomicNumber: number;
+}
 
 const moleculesList = ref<MoleculeCardProps[]>([
   {

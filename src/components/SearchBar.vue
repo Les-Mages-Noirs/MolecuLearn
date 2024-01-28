@@ -21,7 +21,7 @@
     />
   
     <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-      <button @click="search" type="button" class="text-gray-600 hover:text-gray-700">
+      <button @click="" type="button" class="text-gray-600 hover:text-gray-700">
         <span class="sr-only">Search</span>
   
         <svg

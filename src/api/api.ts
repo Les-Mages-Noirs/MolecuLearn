@@ -1,3 +1,5 @@
+import { userStore } from '../store/user';
+
 /**
  * Represents an API class for making HTTP requests.
  */
@@ -5,7 +7,7 @@ export class API {
 	/**
 	 * The base URL of the API.
 	 */
-	static readonly BASE_URL = 'https://localhost:8000/api';
+	static readonly BASE_URL = 'https://localhost:8000';
 
 	/**
 	 * Sends a GET request to the specified endpoint.
@@ -60,9 +62,20 @@ export class API {
 	 * @param args - The arguments to pass to the fetch function.
 	 * @returns A promise that resolves to the response data.
 	 */
-	static async #fetch<T>(...args: Parameters<typeof fetch>): Promise<T> {
+	static async #fetch<T>(input: RequestInfo | URL, init?: RequestInit): Promise<T> {
+		const defaultHeaders: Record<string | number | symbol, any> = {
+			//Accept: 'application/json',
+			'Content-Type': 'application/json'
+		};
+
+		if (userStore.token) {
+			defaultHeaders['Authorization'] = `Bearer ${userStore.token}`;
+		}
+		init = { headers: { ...defaultHeaders, ...init?.headers }, ...init };
+
+		console.log(init);
 		try {
-			const response = await fetch(...args);
+			const response = await fetch(input, init);
 			if (!response.ok) {
 				throw new Error(`Fetch error: ${response.status}`);
 			}

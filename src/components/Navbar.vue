@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import loginSVG from "../../public/img/login.svg";
+import { userStore } from "../store/user";
+
+console.log(userStore.isLoggedIn());
+
+const logout = () => {
+  userStore.logout();
+};
+
 </script>
 
 <template>
@@ -11,7 +19,10 @@ import loginSVG from "../../public/img/login.svg";
     <router-link class="btn btn-ghost text-xl" to="/game">Jouer</router-link>
   </div>
   <div class="flex-none">
-    <router-link to="/login">
+    <button v-if="userStore.isLoggedIn()" @click="logout" class="btn btn-square btn-ghost">
+      logout
+    </button>
+    <router-link  v-else to="/login">
       <button class="btn btn-square btn-ghost">
         <loginSVG />
       </button>
