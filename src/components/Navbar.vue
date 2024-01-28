@@ -13,8 +13,8 @@ const logout = () => {
 <div class="navbar bg-base-100">
   <div class="flex-1 space-x-12">
     <router-link class="btn btn-ghost text-xl" to="/">Accueil</router-link>
-    <router-link class="btn btn-ghost text-xl" to="/recipes">Recettes</router-link>
-    <router-link class="btn btn-ghost text-xl" to="/ingredients">Ingredients</router-link>
+    <router-link class="btn btn-ghost text-xl" to="/recipes">Molécules</router-link>
+    <router-link class="btn btn-ghost text-xl" to="/ingredients">Atomes</router-link>
   </div>
   <div class="flex-none">
     <button v-if="userStore.isLoggedIn()" @click="logout" class="btn btn-square btn-ghost">

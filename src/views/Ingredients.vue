@@ -19,13 +19,15 @@ fetchAtomList();
 <template>
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
-      <div class="text-4xl font-bold">Les ingrédients</div>
+      <div class="text-4xl font-bold">Les Atomes</div>
       <div class="pt-6 w-1/3">
         <SearchBar />
       </div>
     </div>
     <div class="h-auto">
-      <router-link class="btn btn-ghost text-xl" to="/addingredient">Nouvelle ingredient</router-link>
+      <div class="px-28">
+        <router-link class="btn text-md " to="/addingredient">Ajouter un atome </router-link>
+      </div>
       <div class="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-28">
         <AtomCard v-for="atom in atomList" :atom="atom"/>
       </div>

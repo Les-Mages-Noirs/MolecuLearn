@@ -51,7 +51,7 @@ const moleculesList = ref<MoleculeCardProps[]>([
 <template>
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
-      <div class="text-4xl font-bold">Les recettes</div>
+      <div class="text-4xl font-bold">Les Molécules</div>
       <div class="pt-6 w-1/3">
         <SearchBar />
       </div>
