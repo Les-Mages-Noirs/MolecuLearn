@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory  } from 'vue-router';
 import Hero from '../views/Hero.vue';
 import Recipes from '../views/Recipes.vue';
 import Ingredients from '../views/Ingredients.vue';
@@ -18,8 +18,8 @@ const routes = [
 ];
 
 const router = createRouter({
-	history: createWebHashHistory(),
-	routes
+	history: createWebHistory (),
+	routes : routes
 });
 
 export default router;
