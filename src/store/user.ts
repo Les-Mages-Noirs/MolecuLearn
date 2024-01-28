@@ -33,7 +33,7 @@ export const userStore = reactive({
 
 function getTokenFromLocalStorage() {
 	const token = localStorage.getItem('token');
-	return token ? token : '';
+	return token || '';
 }
 
 function setTokenToLocalStorage(token: string) {

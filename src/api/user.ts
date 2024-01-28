@@ -37,7 +37,7 @@ interface CreateUserBody {
 }
 
 export const addUser = async (newUser: NewUser): Promise<User> => {
-	return await API.post<CreateUserBody>('api/users', newUser);
+	return await API.post<CreateUserBody>('/api/users', newUser);
 };
 
 interface UpdateUser {

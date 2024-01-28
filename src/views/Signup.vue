@@ -10,6 +10,7 @@ let username = ref('');
 let password = ref('');
 let confirmPassword = ref('');
 
+const errorP = ref<HTMLInputElement | null>(null);
 const router = useRouter();
 
 if (userStore.isLoggedIn()) {
@@ -20,8 +21,15 @@ const navigateToLogin = () => {
     router.push('/login');
 };
 
+const handleErrorMessage = (m: string) => {
+    if (errorP.value) {
+        errorP.value.innerText = m;
+    }
+}
+
 const submitForm = async () => {
     if (password.value !== confirmPassword.value) {
+        handleErrorMessage("Les mots de passe ne correspondent pas")
         return;
     }
 
@@ -31,11 +39,16 @@ const submitForm = async () => {
         plainPassword: password.value,
     };
 
+
     try {
         await addUser(user);
-    } catch (error) {
-        console.error(error);
+        router.push('/login');
+    } catch (error: any) {
+        if (error.type == 'ConstraintViolationList') {
+            handleErrorMessage("L'email ou le nom d'utilisateur existe déjà");
+        }
     }
+
 };
 </script>
 
@@ -47,6 +60,8 @@ const submitForm = async () => {
         <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12">
             S'inscrire
         </h1>
+        <p class="text-red-500 mt-4" ref="errorP">
+        </p>
         <form class="mt-6" @submit.prevent="submitForm">
             <div>
                 <label class="block text-gray-700">Adresse e-mail</label>
