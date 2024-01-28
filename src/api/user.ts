@@ -40,7 +40,7 @@ export const addUser = async (newUser: NewUser): Promise<User> => {
 	return await API.post<CreateUserBody>('/api/users', newUser);
 };
 
-interface UpdateUser {
+export interface UpdateUser {
 	email: string;
 	username: string;
 	plainPassword: string;

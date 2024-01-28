@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
-import { updateUser } from "../api/user";
-import { User } from "../api/types";
-
-const props = defineProps<{
-  user: User;
-}>();
+import { ref } from "vue";
+import { getMe, updateUser } from "../api/user";
+import { UpdateUser } from "../api/user";
 
 const isPremium = ref(false);
 const isEditingUsername = ref(false);
 const isEditingEmail = ref(false);
 const isEditingPassword = ref(false);
 
-const userRef = ref({
-  username: "azer" ?? props.user.username,
-  email: "azer" ?? props.user.email,
+const connectedUser = await getMe();
+
+const userRef = ref<UpdateUser>({
+  username: connectedUser.username ?? "",
+  email: connectedUser.email ?? "",
   plainPassword: "",
 });
 
@@ -31,7 +29,7 @@ function toggleEditingPassword() {
 }
 
 async function save() {
-  await updateUser(props.user["@id"], userRef.value);
+  await updateUser(connectedUser["@id"], userRef.value);
 }
 
 const handleEditProfile = (event: KeyboardEvent) => {
