@@ -24,3 +24,20 @@ export const getAtomById = async (id: string): Promise<Atom> => {
 	const body = await API.get<GetAtomByIdBody>(`/api/atoms/${id}`);
 	return body;
 };
+
+interface newAtom {
+	atomicNumber: number;
+	symbol: string;
+	name: string;
+	fusionPoint: number;
+	boilingPoint: number;
+	atomicMass: number;
+	volumicMass: number;
+	discovery: number;
+	discoverer: string;
+}
+
+export const addAtom = async (newAtom: newAtom): Promise<Atom> => {
+	return await API.post<Atom>('/api/atoms', newAtom);
+}
+

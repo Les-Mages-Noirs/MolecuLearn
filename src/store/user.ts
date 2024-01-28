@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { User } from '../api/types';
 import { auth, getMe } from '../api/user';
+import { useToast } from 'vue-toastification';
 
 export const userStore = reactive({
 	user: {} as User,
@@ -20,6 +21,7 @@ export const userStore = reactive({
 
 		if (!token) return false;
 		this.setToken(token);
+		retrieveUserFromAPI();
 		return true;
 	},
 	async logout() {
@@ -33,7 +35,7 @@ export const userStore = reactive({
 
 function getTokenFromLocalStorage() {
 	const token = localStorage.getItem('token');
-	return token ? token : '';
+	return token || '';
 }
 
 function setTokenToLocalStorage(token: string) {
@@ -44,8 +46,20 @@ function removeTokenFromLocalStorage() {
 	localStorage.removeItem('token');
 }
 
-console.log('token :', userStore.getToken());
-getMe().then(user => {
-	console.log('user :', user);
-	userStore.setUser(user);
-});
+async function retrieveUserFromAPI() {
+	if (userStore.isLoggedIn()) {
+		try {
+			const user = await getMe();
+			console.log('user', user);
+			userStore.setUser(user);
+			console.log('zizi');
+
+			useToast().success('Connecté en tant que ' + user.username);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+	return {} as User;
+}
+
+retrieveUserFromAPI();

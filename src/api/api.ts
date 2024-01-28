@@ -1,5 +1,11 @@
 import { userStore } from '../store/user';
 
+export interface CustomError {
+	message: string;
+	code: number;
+	type?: string;
+}
+
 /**
  * Represents an API class for making HTTP requests.
  */
@@ -65,21 +71,30 @@ export class API {
 	static async #fetch<T>(input: RequestInfo | URL, init?: RequestInit): Promise<T> {
 		const defaultHeaders: Record<string | number | symbol, any> = {
 			//Accept: 'application/json',
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/ld+json'
 		};
 
-		if (userStore.token) {
-			defaultHeaders['Authorization'] = `Bearer ${userStore.token}`;
+		if (userStore.isLoggedIn()) {
+			defaultHeaders['Authorization'] = `Bearer ${userStore.getToken()}`;
 		}
 		init = { headers: { ...defaultHeaders, ...init?.headers }, ...init };
 
 		console.log(init);
 		try {
+			console.log('test1');
+
 			const response = await fetch(input, init);
+			const jsonRes = await response.json();
 			if (!response.ok) {
-				throw new Error(`Fetch error: ${response.status}`);
+				console.log(jsonRes);
+
+				return Promise.reject({
+					message: jsonRes['hydra:description'],
+					code: response.status,
+					type: jsonRes['@type']
+				} as CustomError);
 			}
-			return response.json() as T;
+			return jsonRes as T;
 		} catch (error) {
 			return Promise.reject(error);
 		}
