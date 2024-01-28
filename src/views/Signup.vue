@@ -50,22 +50,22 @@ const submitForm = async () => {
         <form class="mt-6" @submit.prevent="submitForm">
             <div>
                 <label class="block text-gray-700">Adresse e-mail</label>
-                <input v-model="email" type="email" placeholder="Entrez votre adresse e-mail" required />
+                <input v-model="email" type="email" placeholder="Entrez votre adresse e-mail"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary focus:bg-white focus:outline-none" required />
             </div>
 
             <div class="mt-4">
                 <label class="block text-gray-700">Nom d'utilisateur</label>
-                <input v-model="username" type="text" placeholder="Entrez un nom d'utilisateur" minlength="6" required />
+                <input v-model="username" type="text" placeholder="Entrez un nom d'utilisateur"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary focus:bg-white focus:outline-none" minlength="6" required />
             </div>
 
             <div class="mt-4">
                 <label class="block text-gray-700">Mot de passe</label>
-                <input v-model="password" type="password" placeholder="Entrez votre mot de passe" minlength="6" required />
+                <input v-model="password" type="password" placeholder="Entrez votre mot de passe"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary focus:bg-white focus:outline-none" minlength="6" required />
             </div>
 
             <div class="mt-4">
                 <label class="block text-gray-700">Confirmer le mot de passe</label>
-                <input v-model="confirmPassword" type="password" placeholder="Entrez à nouveau votre mot de passe" minlength="6"
+                <input v-model="confirmPassword" type="password" placeholder="Entrez à nouveau votre mot de passe"  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primary focus:bg-white focus:outline-none" minlength="6"
                     required />
             </div>
 
