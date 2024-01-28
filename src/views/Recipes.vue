@@ -2,8 +2,7 @@
 import SearchBar from "../components/SearchBar.vue";
 import MoleculeCard from "../components/Cards/MoleculeCard.vue";
 import { ref } from "vue";
-import {  Molecule } from "../api/types";
-
+import { Molecule } from "../api/types";
 
 const moleculesList = ref<Molecule[]>([
   //fake molecules
@@ -11,17 +10,15 @@ const moleculesList = ref<Molecule[]>([
     "@context": "/api/contexts/Molecule",
     "@id": "/api/molecules/1",
     "@type": "Molecule",
-    "id": 1,
-    "name": "Methane",
-    "connections": []
+    id: 1,
+    name: "Methane",
+    connections: [],
   },
-              
 ]);
 </script>
 
 <template>
-    <div id="modal-portal">
-  </div>
+  <div id="modal-portal"></div>
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
       <div class="text-4xl font-bold">Les Molécules</div>
@@ -35,6 +32,7 @@ const moleculesList = ref<Molecule[]>([
       >
         <MoleculeCard
           v-for="molecule in moleculesList"
+          :key="molecule.id"
           :molecule="molecule"
         />
       </div>
