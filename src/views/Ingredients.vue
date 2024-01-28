@@ -1,46 +1,19 @@
 <script setup lang="ts">
 import SearchBar from "../components/SearchBar.vue";
 import AtomCard from "../components/Cards/AtomCard.vue";
-import type { AtomCardProps } from "../utils/propsTypes";
 import { ref } from "vue";
+import { getAtoms } from "../api/atom";
+import { Atom } from "../api/types";
 
-const atomList = ref<AtomCardProps[]>([
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-  {
-    name: "Hydrogen",
-    symbol: "H",
-    atomicNumber: 1,
-  },
-]);
+const atomList = ref<Atom[]>([]);
+const fetchAtomList = async () => {
+  atomList.value = await getAtoms();
+};
+
+fetchAtomList();
+
+
+
 </script>
 
 <template>
@@ -54,8 +27,7 @@ const atomList = ref<AtomCardProps[]>([
     <div class="h-auto">
       <router-link class="btn btn-ghost text-xl" to="/addingredient">Nouvelle ingredient</router-link>
       <div class="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-28">
-        <AtomCard v-for="atom in atomList" :key="atom.atomicNumber" :name="atom.name" :symbol="atom.symbol"
-          :atomicNumber="atom.atomicNumber" />
+        <AtomCard v-for="atom in atomList" :atom="atom"/>
       </div>
     </div>
   </div>
