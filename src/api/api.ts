@@ -68,8 +68,8 @@ export class API {
 			'Content-Type': 'application/json'
 		};
 
-		if (userStore.token) {
-			defaultHeaders['Authorization'] = `Bearer ${userStore.token}`;
+		if (userStore.isLoggedIn()) {
+			defaultHeaders['Authorization'] = `Bearer ${userStore.getToken()}`;
 		}
 		init = { headers: { ...defaultHeaders, ...init?.headers }, ...init };
 
