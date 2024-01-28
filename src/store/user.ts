@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { User } from '../api/types';
 import { auth, getMe } from '../api/user';
+import { useToast } from 'vue-toastification';
 
 export const userStore = reactive({
 	user: {} as User,
@@ -49,7 +50,10 @@ async function retrieveUserFromAPI() {
 		try {
 			const user = await getMe();
 			console.log('user', user);
-			return user;
+			userStore.setUser(user);
+			console.log('zizi');
+
+			useToast().success('Logged in successfully!');
 		} catch (error) {
 			console.log(error);
 		}
@@ -57,4 +61,4 @@ async function retrieveUserFromAPI() {
 	return {} as User;
 }
 
-userStore.setUser(await retrieveUserFromAPI());
+retrieveUserFromAPI();
