@@ -52,16 +52,10 @@ const atomList = ref<AtomCardProps[]>([
       </div>
     </div>
     <div class="h-auto">
-      <div
-        class="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-28"
-      >
-        <AtomCard
-          v-for="atom in atomList"
-          :key="atom.atomicNumber"
-          :name="atom.name"
-          :symbol="atom.symbol"
-          :atomicNumber="atom.atomicNumber"
-        />
+      <router-link class="btn btn-ghost text-xl" to="/addingredient">Nouvelle ingredient</router-link>
+      <div class="grid grid-flow-row gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-28">
+        <AtomCard v-for="atom in atomList" :key="atom.atomicNumber" :name="atom.name" :symbol="atom.symbol"
+          :atomicNumber="atom.atomicNumber" />
       </div>
     </div>
   </div>
