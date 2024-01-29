@@ -1,6 +1,6 @@
 import { userStore } from '../store/user';
 import { API } from './api';
-import { Connection, Molecule } from './types';
+import { Molecule } from './types';
 
 interface GetMoleculesBody {
 	'@context': string;
@@ -36,4 +36,8 @@ export const createMolecule = async (name: string): Promise<Molecule> => {
 	const userIRI = userStore.getUser()['@id'];
 	const body = await API.post<Molecule>(`/api/molecules`, { name, connections: [] });
 	return body;
+};
+
+export const deleteMolecule = async (id: number): Promise<void> => {
+	await API.delete(`/api/molecules/${id}`);
 };

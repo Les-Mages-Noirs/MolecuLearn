@@ -13,7 +13,7 @@ export class API {
 	/**
 	 * The base URL of the API.
 	 */
-	static readonly BASE_URL = 'https://localhost:8000';
+	static readonly BASE_URL = 'http://localhost:8000';
 
 	/**
 	 * Sends a GET request to the specified endpoint.
@@ -71,7 +71,7 @@ export class API {
 	static async #fetch<T>(input: RequestInfo | URL, init?: RequestInit): Promise<T> {
 		const defaultHeaders: Record<string | number | symbol, any> = {
 			//Accept: 'application/json',
-			'Content-Type': 'application/ld+json'
+			'Content-Type': 'application/ld+json',
 		};
 
 		if (userStore.isLoggedIn()) {
