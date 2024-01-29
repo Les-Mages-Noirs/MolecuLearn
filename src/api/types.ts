@@ -4,6 +4,7 @@ export interface Molecule {
 	'@type': string;
 	id: number;
 	name: string;
+	description: string;
 	connections: Connection[];
 }
 

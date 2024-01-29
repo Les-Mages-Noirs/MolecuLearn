@@ -8,10 +8,10 @@ import { userStore } from "../store/user";
   <div class="navbar bg-base-100">
     <div class="flex-1 space-x-12">
       <router-link class="btn btn-ghost text-xl" to="/">Accueil</router-link>
-      <router-link class="btn btn-ghost text-xl" to="/recipes"
+      <router-link class="btn btn-ghost text-xl" to="/molecules"
         >Molécules</router-link
       >
-      <router-link class="btn btn-ghost text-xl" to="/ingredients"
+      <router-link class="btn btn-ghost text-xl" to="/atomes"
         >Atomes</router-link
       >
     </div>

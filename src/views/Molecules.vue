@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import SearchBar from "../components/SearchBar.vue";
 import MoleculeCard from "../components/Cards/MoleculeCard.vue";
 import { ref } from "vue";
 import { Molecule } from "../api/types";
@@ -22,9 +21,6 @@ const moleculesList = ref<Molecule[]>([
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
       <div class="text-4xl font-bold">Les Molécules</div>
-      <div class="pt-6 w-1/3">
-        <SearchBar />
-      </div>
     </div>
     <div class="min-h-full">
       <div

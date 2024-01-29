@@ -22,7 +22,7 @@ const closeModal = () => {
   <div class="card w-96 bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title">{{ molecule.name }}</h2>
-      <p>descripfion</p>
+      <p>{{ molecule.description }}</p>
       <div class="card-actions justify-end">
         <button class="btn btn-primary" @click="openModal">Infos</button>
       </div>
