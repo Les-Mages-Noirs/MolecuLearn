@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { getMe, updateUser } from "../api/user";
-import { UpdateUser } from "../api/user";
+import { UpdateUser, getAvatar } from "../api/user";
+import md5 from "crypto-js/md5";
 
 const isPremium = ref(false);
 const isEditingUsername = ref(false);
@@ -40,6 +41,8 @@ const handleEditProfile = (event: KeyboardEvent) => {
     save();
   }
 };
+
+const profilePic = await getAvatar(md5(connectedUser.email));
 </script>
 
 <template>
@@ -48,7 +51,7 @@ const handleEditProfile = (event: KeyboardEvent) => {
       <div class="flex items-center justify-between">
         <div class="avatar">
           <div class="w-32 rounded-full">
-            <img src="../../public/img/profile-pic.jpg" />
+            <img :src="profilePic" />
           </div>
         </div>
         <div v-if="isPremium" class="badge badge-accent">Premium</div>

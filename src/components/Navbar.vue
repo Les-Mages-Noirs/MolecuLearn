@@ -15,9 +15,16 @@ import { userStore } from "../store/user";
         >Atomes</router-link
       >
     </div>
-    <div class="flex-none">
-      <router-link v-if="userStore.isLoggedIn()" to="/profile">
+    <div class="">
+      <router-link
+        class="flex items-center"
+        v-if="userStore.isLoggedIn()"
+        to="/profile"
+      >
         <profileSvg />
+        <button class="btn btn-ghost" @click="userStore.logout()">
+          Logout
+        </button>
       </router-link>
       <router-link v-else to="/login">
         <button class="btn btn-square btn-ghost">
