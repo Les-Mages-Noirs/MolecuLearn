@@ -5,6 +5,7 @@ import { ref, defineProps } from "vue";
 
 const props = defineProps<{
   molecule: Molecule;
+  updateList: () => void;
 }>();
 
 const showModal = ref(false);
@@ -33,6 +34,7 @@ const closeModal = () => {
       v-if="showModal"
       @closeModal="closeModal"
       :molecule="props.molecule"
+      :updateList="() => props.updateList()"
     />
   </Teleport>
 </template>

@@ -1,3 +1,4 @@
+import exp from 'constants';
 import { API } from './api';
 import { Molecule } from './types';
 
@@ -29,3 +30,12 @@ export const getMoleculesByUserId = async (userId: string): Promise<Molecule[]> 
 	const body: GetMoleculesByUserIdBody = await API.get(`/api/user/${userId}/molecules`);
 	return body['hydra:member'];
 };
+
+export const addMolecule = async (newMolecule: Molecule): Promise<Molecule> => {
+	return await API.post<Molecule>('/api/molecules', newMolecule);
+}
+
+export const deleteMolecule = async (id: number): Promise<void> => {
+	await API.delete(`/api/molecules/${id}`);
+}
+

@@ -2,18 +2,16 @@
 import MoleculeCard from "../components/Cards/MoleculeCard.vue";
 import { ref } from "vue";
 import { Molecule } from "../api/types";
+import { getMolecules } from "../api/molecule";
 
-const moleculesList = ref<Molecule[]>([
-  //fake molecules
-  {
-    "@context": "/api/contexts/Molecule",
-    "@id": "/api/molecules/1",
-    "@type": "Molecule",
-    id: 1,
-    name: "Methane",
-    connections: [],
-  },
-]);
+const moleculesList = ref<Molecule[]>([]);
+const fetchMoleculeList = async () => {
+  console.log("fetching molecules");
+
+  moleculesList.value = await getMolecules();
+};
+
+fetchMoleculeList();
 </script>
 
 <template>
@@ -30,6 +28,7 @@ const moleculesList = ref<Molecule[]>([
           v-for="molecule in moleculesList"
           :key="molecule.id"
           :molecule="molecule"
+          :updateList="() => fetchMoleculeList()"
         />
       </div>
     </div>
