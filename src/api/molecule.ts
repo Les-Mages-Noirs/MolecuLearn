@@ -15,7 +15,7 @@ export const getMolecules = async (): Promise<Molecule[]> => {
 	return body['hydra:member'];
 };
 
-interface GetMoleculeByIdBody extends Molecule {}
+interface GetMoleculeByIdBody extends Molecule { }
 
 export const getMoleculeById = async (id: string): Promise<Molecule> => {
 	const body = await API.get<GetMoleculeByIdBody>(`/api/molecules/${id}`);
