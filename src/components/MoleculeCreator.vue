@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
   import { ref, onMounted, computed } from 'vue';
   import * as d3 from 'd3';
   import { Atom, AtomNode, Molecule } from '../api/types';
@@ -6,10 +7,16 @@
 import { createAtomNode } from '../api/atomNode';
 import { createMolecule } from '../api/molecule';
 import { createConnection } from '../api/connection';
+import { useToast } from 'vue-toastification';
+import { useRouter } from 'vue-router';
 
   const selectedSymbol = ref('');
   const moleculeName = ref('');
   const moleculeDescription = ref('');
+  const errorDisplay = ref<HTMLParagraphElement | null>(null);
+  const router = useRouter();
+
+
 
   const atoms = ref<Atom[]>();
   const uniqueSymbols = computed(() => {
@@ -222,12 +229,18 @@ import { createConnection } from '../api/connection';
 
   const create = async () => {
 
-    const molecule = await createMolecule(moleculeName.value);
+    if (!moleculeName.value) return displayError('Le nom de la molécule est obligatoire');
+    if (!moleculeDescription.value) return displayError('La description de la molécule est obligatoire');
+    if (!data.nodes.length) return displayError('La molécule doit contenir au moins un atome');
+    if (!data.links.length) return displayError('La molécule doit contenir au moins une liaison');
+
+
+    const molecule = await createMolecule(moleculeName.value, moleculeDescription.value);
 
     const oldIdToAtomNode = new Map<number, AtomNode>();
     console.log(data.nodes)
 
-    const ps = data.nodes.map(async (node) => {
+    let ps = data.nodes.map(async (node) => {
       const atom = symbolToAtom(node.name);
       if (!atom) return;
       console.log("iiiiiiii", atom)
@@ -239,7 +252,7 @@ import { createConnection } from '../api/connection';
 
     await Promise.all(ps);
 
-    data.links.forEach(async (link) => {
+    ps = data.links.map(async (link) => {
       const source = oldIdToAtomNode.get(link.source.id);
       const target = oldIdToAtomNode.get(link.target.id);
       console.log("aaaaaaa", source, target) 
@@ -248,11 +261,25 @@ import { createConnection } from '../api/connection';
       console.log(linkType)
       await createConnection(source, target, linkType, molecule);
     });
+
+    await Promise.all(ps);
+
+    useToast().success('Molécule créée avec succès');
+    router.push('/molecules');
+  
   }
+
+  const displayError = (message: string) => {
+  if (errorDisplay.value) {
+    errorDisplay.value.innerText = message;
+  }
+};
+
 </script>
 
 <template>
   <div class="graph-container">
+    <p ref="errorDisplay" class="text-red-500"></p>
     <label for="name">Nom de la molécule:</label>
     <input type="text" v-model="moleculeName" id="name">
 

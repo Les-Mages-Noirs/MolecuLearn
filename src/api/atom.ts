@@ -40,3 +40,8 @@ interface newAtom {
 export const addAtom = async (newAtom: newAtom): Promise<Atom> => {
 	return await API.post<Atom>('/api/atoms', newAtom);
 };
+
+export const getAtomFromIRI = async (IRI: string) => {
+	const body = await API.get<Atom>(IRI);
+	return body;
+};

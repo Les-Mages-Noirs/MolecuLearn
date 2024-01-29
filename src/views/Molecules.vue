@@ -3,6 +3,7 @@ import MoleculeCard from "../components/Cards/MoleculeCard.vue";
 import { ref } from "vue";
 import { Molecule } from "../api/types";
 import { getMolecules } from "../api/molecule";
+import { userStore } from "../store/user";
 
 const moleculesList = ref<Molecule[]>([]);
 const fetchMoleculeList = async () => {
@@ -16,9 +17,11 @@ fetchMoleculeList();
 
 <template>
   <div id="modal-portal"></div>
+
   <div class="min-h-[calc(100vh-4rem)] flex flex-col w-full">
     <div class="p-20 flex flex-col justify-center items-center">
       <div class="text-4xl font-bold">Les Molécules</div>
+      <a v-if="userStore.isLoggedIn()" href="/molecules/create">Ajouter</a>
     </div>
     <div class="min-h-full">
       <div

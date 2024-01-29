@@ -2,6 +2,7 @@
 import { defineProps, defineEmits } from "vue";
 import type { Molecule } from "../api/types";
 import { deleteMolecule } from "../api/molecule";
+import ShowMolecule from "./ShowMolecule.vue";
 
 defineEmits<{
   (event: "closeModal"): void;
@@ -35,6 +36,8 @@ const handleDelete = async () => {
     <div class="text-xl py-6">
       {{ molecule.description }}
     </div>
+
+    <ShowMolecule :molecule="molecule"/>
 
     <div class="p-4 flex justify-center">
       <button class="btn btn-error" @click="handleDelete">Supprimer</button>

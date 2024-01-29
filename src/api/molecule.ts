@@ -31,10 +31,10 @@ export const getMoleculesByUserId = async (userId: string): Promise<Molecule[]> 
 	return body['hydra:member'];
 };
 
-export const createMolecule = async (name: string): Promise<Molecule> => {
+export const createMolecule = async (name: string, description: string): Promise<Molecule> => {
 	if (!userStore.isLoggedIn()) throw new Error('User not logged in');
 	const userIRI = userStore.getUser()['@id'];
-	const body = await API.post<Molecule>(`/api/molecules`, { name, connections: [] });
+	const body = await API.post<Molecule>(`/api/molecules`, { name, connections: [], description });
 	return body;
 };
 

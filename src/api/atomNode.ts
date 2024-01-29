@@ -7,3 +7,8 @@ export const createAtomNode = (atom: Atom) => {
 	});
 	return atomNode;
 };
+
+export const getAtomNodeFromIRI = async (IRI: string) => {
+	const body = await API.get<AtomNode>(IRI);
+	return body;
+};

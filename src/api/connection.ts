@@ -6,3 +6,8 @@ export const createConnection = async (atom1: AtomNode, atom2: AtomNode, value: 
 	const body = await API.post<Connection>('/api/connections', { atom1: atom1['@id'], atom2: atom2['@id'], value, molecule: molecule['@id'] });
 	return body;
 };
+
+export const getConnectionFromIRI = async (IRI: string) => {
+	const body = await API.get<Connection>(IRI);
+	return body;
+};

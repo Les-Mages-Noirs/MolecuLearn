@@ -5,7 +5,7 @@ export interface Molecule {
 	id: number;
 	name: string;
 	description: string;
-	connections: Connection[];
+	connections: string[];
 }
 
 export interface Connection {
