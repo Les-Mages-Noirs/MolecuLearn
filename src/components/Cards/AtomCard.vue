@@ -33,4 +33,5 @@ const closeModal = () => {
   <Teleport to="#modal-atom">
     <ModalAtom v-if="showModal" @closeModal="closeModal" :atom="props.atom" />
   </Teleport>
+</div>
 </template>
