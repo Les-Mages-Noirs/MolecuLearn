@@ -59,10 +59,6 @@ export const updateUser = async (id: string, updateUser: UpdateUser): Promise<Us
 	return await API.patch<UpdateUserBody>(`/api/users/${id}`, updateUser);
 };
 
-export const getAvatar = async (email: string): Promise<string> => {
-	return await API.getAvatar<string>(`/avatar/${email}`);
-}
-
 type DeleteUserBody = string;
 
 export const deleteUser = async (id: string): Promise<string> => {

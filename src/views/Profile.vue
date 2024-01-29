@@ -42,7 +42,7 @@ const handleEditProfile = (event: KeyboardEvent) => {
   }
 };
 
-const profilePic = await getAvatar(md5(connectedUser.email));
+const profilePic = "http://localhost:8001/avatar/" + md5(connectedUser.email);
 </script>
 
 <template>
