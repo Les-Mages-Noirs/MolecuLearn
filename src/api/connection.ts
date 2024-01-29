@@ -11,3 +11,6 @@ export const getConnectionFromIRI = async (IRI: string) => {
 	const body = await API.get<Connection>(IRI);
 	return body;
 };
+
+
+
