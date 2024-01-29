@@ -1,5 +1,6 @@
+import { userStore } from '../store/user';
 import { API } from './api';
-import { Molecule } from './types';
+import { Connection, Molecule } from './types';
 
 interface GetMoleculesBody {
 	'@context': string;
@@ -28,4 +29,11 @@ interface GetMoleculesByUserIdBody {
 export const getMoleculesByUserId = async (userId: string): Promise<Molecule[]> => {
 	const body: GetMoleculesByUserIdBody = await API.get(`/api/user/${userId}/molecules`);
 	return body['hydra:member'];
+};
+
+export const createMolecule = async (name: string): Promise<Molecule> => {
+	if (!userStore.isLoggedIn()) throw new Error('User not logged in');
+	const userIRI = userStore.getUser()['@id'];
+	const body = await API.post<Molecule>(`/api/molecules`, { name, connections: [] });
+	return body;
 };

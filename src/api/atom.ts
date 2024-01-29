@@ -39,5 +39,4 @@ interface newAtom {
 
 export const addAtom = async (newAtom: newAtom): Promise<Atom> => {
 	return await API.post<Atom>('/api/atoms', newAtom);
-}
-
+};

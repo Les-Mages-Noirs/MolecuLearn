@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>D3.js Simple Graph</title>
+		<script src="https://d3js.org/d3.v7.min.js"></script>
+	</head>
+	<body>
+		<svg width="600" height="400"></svg>
+		<button onclick="toggleMode()">Activer le mode liaison</button>
+		<button onclick="ajouterNoeud()">Ajouter un nœud</button>
+
+		<script>
+			let data = {
+				nodes: [
+					{ id: 1, name: 'A' },
+					{ id: 2, name: 'B' },
+					{ id: 3, name: 'C' },
+					{ id: 4, name: 'D' },
+					{ id: 5, name: 'E' }
+				],
+				links: [
+					{ source: 1, target: 2 },
+					{ source: 2, target: 3 },
+					{ source: 3, target: 4 },
+					{ source: 4, target: 5 },
+					{ source: 5, target: 1 }
+				]
+			};
+
+			const svg = d3.select('svg');
+			let modeLiaison = false;
+			let nodeSelection = null;
+
+			function updateGraph() {
+				// Clear existing graph
+				svg.selectAll('*').remove();
+
+				console.log(data);
+				const nodesForRuntime = [...data.nodes];
+				const linksForRuntime = [...data.links];
+
+				const svgWidth = +svg.attr('width');
+				const svgHeight = +svg.attr('height');
+				const margin = 20; // Marge pour éviter que les noeuds ne soient collés au bord du SVG
+
+				// Create new simulation
+				const simulation = d3
+					.forceSimulation(nodesForRuntime)
+					.force(
+						'link',
+						d3
+							.forceLink(linksForRuntime)
+							.id(d => d.id)
+							.distance(100)
+							.strength(0.5)
+					) // Reduced link strength
+					.force('charge', d3.forceManyBody().strength(-150)) // Adjusted charge strength
+					.force('x', d3.forceX(svgWidth / 2).strength(0.1)) // Fixer la position horizontale des noeuds
+					.force('y', d3.forceY(svgHeight / 2).strength(0.1)) // Fixer la position verticale des noeuds
+					.force('collide', d3.forceCollide().radius(15)); // Added collision force
+
+				const link = svg.selectAll('.link').data(linksForRuntime).enter().append('line').attr('class', 'link').style('stroke', '#ccc').style('stroke-width', 2);
+
+				const node = svg.selectAll('.node').data(nodesForRuntime).enter().append('g').attr('class', 'node').call(drag(simulation));
+
+				node.append('circle').attr('r', 10).style('fill', '#1f77b4').style('stroke', '#fff').style('stroke-width', 2);
+
+				node
+					.append('text')
+					.attr('dy', '.35em')
+					.attr('text-anchor', 'middle')
+					.style('fill', '#fff')
+					.text(d => d.name);
+
+				simulation.on('tick', () => {
+					link
+						.attr('x1', d => d.source.x)
+						.attr('y1', d => d.source.y)
+						.attr('x2', d => d.target.x)
+						.attr('y2', d => d.target.y);
+
+					// Limiter les positions des noeuds à l'intérieur du SVG
+					node.attr('transform', d => `translate(${Math.max(margin, Math.min(svgWidth - margin, d.x))},${Math.max(margin, Math.min(svgHeight - margin, d.y))})`);
+				});
+
+				node.on('click', function (event, d) {
+					if (!modeLiaison) return;
+					console.log('test');
+					if (!nodeSelection) {
+						nodeSelection = d;
+					} else {
+						if (nodeSelection.id !== d.id) {
+							data.links.push({ source: nodeSelection.id, target: d.id });
+							updateGraph();
+						}
+						nodeSelection = null;
+					}
+				});
+			}
+
+			function toggleMode() {
+				modeLiaison = !modeLiaison;
+				if (!modeLiaison) {
+					nodeSelection = null;
+				}
+			}
+
+			function drag(simulation) {
+				function dragstarted(event, d) {
+					if (!event.active) simulation.alphaTarget(0.3).restart();
+					d.fx = d.x;
+					d.fy = d.y;
+				}
+
+				function dragged(event, d) {
+					d.fx = event.x;
+					d.fy = event.y;
+				}
+
+				function dragended(event, d) {
+					if (!event.active) simulation.alphaTarget(0);
+					d.fx = null;
+					d.fy = null;
+				}
+
+				return d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended);
+			}
+
+			function ajouterNoeud() {
+				const newNodeId = data.nodes.length + 1;
+				const newNode = { id: newNodeId, name: String.fromCharCode(64 + newNodeId) };
+				data.nodes.push(newNode);
+				updateGraph();
+			}
+
+			updateGraph(); // Initial graph creation
+		</script>
+	</body>
+</html>

@@ -82,5 +82,6 @@ interface MeBody extends User {}
 
 export const getMe = async (): Promise<User> => {
 	const user = await API.get<MeBody>('/api/me');
+	console.log(22, user);
 	return user;
 };

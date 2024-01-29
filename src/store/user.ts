@@ -8,6 +8,9 @@ export const userStore = reactive({
 	setUser(user: User) {
 		this.user = user;
 	},
+	getUser() {
+		return this.user;
+	},
 	token: getTokenFromLocalStorage(),
 	setToken(token: string) {
 		this.token = token;
