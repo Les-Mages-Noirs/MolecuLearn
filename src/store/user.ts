@@ -22,7 +22,10 @@ export const userStore = reactive({
 	async login(email: string, password: string) {
 		const token = await auth(email, password);
 
-		if (!token) return false;
+		if (!token) {
+			useToast().error('Identifiants incorrects');
+			return false;
+		}
 		this.setToken(token);
 		retrieveUserFromAPI();
 		return true;
@@ -30,10 +33,16 @@ export const userStore = reactive({
 	async logout() {
 		this.setToken('');
 		removeTokenFromLocalStorage();
+		useToast().success('Déconnecté');
 	},
 	isLoggedIn() {
 		return !!this.token;
+	},
+	isLoggedOut() {
+		return !this.token;
 	}
+
+
 });
 
 function getTokenFromLocalStorage() {
@@ -60,9 +69,14 @@ async function retrieveUserFromAPI() {
 			useToast().success('Connecté en tant que ' + user.username);
 		} catch (error) {
 			console.log(error);
+
 		}
 	}
 	return {} as User;
 }
+
+
+
+
 
 retrieveUserFromAPI();

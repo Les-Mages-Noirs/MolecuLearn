@@ -14,7 +14,7 @@ export const getUsers = async (): Promise<User[]> => {
 	return body['hydra:member'];
 };
 
-interface GetUserByIdBody extends User {}
+interface GetUserByIdBody extends User { }
 
 export const getUserById = async (id: string): Promise<User> => {
 	const body = await API.get<GetUserByIdBody>(`api/users/${id}`);
@@ -78,10 +78,11 @@ export const auth = async (email: string, password: string): Promise<string> => 
 	}
 };
 
-interface MeBody extends User {}
+interface MeBody extends User { }
 
 export const getMe = async (): Promise<User> => {
 	const user = await API.get<MeBody>('/api/me');
 	console.log(22, user);
 	return user;
 };
+

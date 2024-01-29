@@ -13,7 +13,7 @@ export class API {
 	/**
 	 * The base URL of the API.
 	 */
-	static readonly BASE_URL = 'https://localhost:8000';
+	static readonly BASE_URL = 'http://localhost:8000';
 
 	/**
 	 * Sends a GET request to the specified endpoint.
