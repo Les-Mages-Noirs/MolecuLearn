@@ -3,6 +3,7 @@ import { defineProps, defineEmits } from "vue";
 import type { Molecule } from "../api/types";
 import { deleteMolecule } from "../api/molecule";
 import ShowMolecule from "./ShowMolecule.vue";
+import { useToast } from "vue-toastification";
 
 defineEmits<{
   (event: "closeModal"): void;
@@ -15,7 +16,11 @@ const props = defineProps<{
 
 const handleDelete = async () => {
   try {
+
+
+    useToast().success("Molécule supprimée");
     await deleteMolecule(props.molecule.id);
+
   } catch (e) {
     console.log(e);
   }
@@ -26,8 +31,7 @@ const handleDelete = async () => {
 </script>
 <template>
   <div
-    class="p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border bg-white border-gray-200 rounded-md z-10"
-  >
+    class="p-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border bg-white border-gray-200 rounded-md z-10">
     <div class="p-2 flex items-center justify-between">
       <div class="text-2xl font-bold">{{ molecule.name }}</div>
       <button class="btn" @click="$emit('closeModal')">X</button>
@@ -37,7 +41,7 @@ const handleDelete = async () => {
       {{ molecule.description }}
     </div>
 
-    <ShowMolecule :molecule="molecule"/>
+    <ShowMolecule :molecule="molecule" />
 
     <div class="p-4 flex justify-center">
       <button class="btn btn-error" @click="handleDelete">Supprimer</button>

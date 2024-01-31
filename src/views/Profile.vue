@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { getMe, updateUser } from "../api/user";
 import { UpdateUser, getAvatar } from "../api/user";
+import { API } from '../api/api';
 import md5 from "crypto-js/md5";
 
 const isPremium = ref(false);
@@ -42,6 +43,12 @@ const handleEditProfile = (event: KeyboardEvent) => {
   }
 };
 
+const handlePremium = () => {
+  API.get("/premium/checkout").then((data) => {
+    console.log(data);
+    isPremium.value = true;
+  });
+}
 const profilePic = "http://localhost:8001/avatar/" + md5(connectedUser.email);
 </script>
 
@@ -55,7 +62,7 @@ const profilePic = "http://localhost:8001/avatar/" + md5(connectedUser.email);
           </div>
         </div>
         <div v-if="isPremium" class="badge badge-accent">Premium</div>
-        <button v-else class="btn">Passer à premium</button>
+        <button v-else class="btn" @click="handlePremium">Passer à premium</button>
       </div>
       <div class="py-4 flex flex-col space-y-6">
         <h1
