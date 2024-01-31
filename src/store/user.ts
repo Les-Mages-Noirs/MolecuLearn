@@ -53,9 +53,7 @@ async function retrieveUserFromAPI() {
 	if (userStore.isLoggedIn()) {
 		try {
 			const user = await getMe();
-			console.log('user', user);
 			userStore.setUser(user);
-			console.log('zizi');
 
 			useToast().success('Connecté en tant que ' + user.username);
 		} catch (error) {
